@@ -1,0 +1,8 @@
+pip~=24.2
+wheel~=0.44.0
+packaging~=24.1
+pandas
+numpy
+notebook
+pyspark
+ipykernel
