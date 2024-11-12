@@ -42,12 +42,14 @@ pip install -r requirements.txt
    - **Outcome**: Insights into the data’s characteristics and imbalance, guiding the model-building stage.
    - **Script**: `scripts/eda.py`
 
-3. **Feature Engineering**
-   - **Objective**: Engineer features relevant to fraud detection, such as transaction timing and high-value transaction flags.
+### 3. **Feature Engineering**
+   - **Objective**: Engineer features that highlight transaction frequency, average amount, and value patterns commonly associated with fraud.
    - **Key Features**:
-     - `Transaction_Hour`: Extracted from the `Time` column to observe trends based on the hour of the transaction.
-     - `High_Amount`: Flags high-value transactions that may indicate fraud.
-   - **Tool**: PySpark for efficient distributed feature creation.
+     - **Transactions_Last_1_Hour** and **Transactions_Last_5_Mins**: Counts of transactions within the last 1-hour and 5-mins windows to detect high transaction frequency, a common fraud pattern.
+     - **Avg_Amount_Last_1_Hour** and **Avg_Amount_Last_5_Mins**: The average transaction amount within the last 1-hour and 5-mins window, helping to identify sudden spending increases.
+     - **High_Amount**: Flags high-value transactions that exceed a predefined threshold (e.g., $2000), which can signal abnormal spending behavior.
+     - **Stddev_Amount_Last_1_Hour** and **Stddev_Amount_Last_5_Mins**: The rolling standard deviation of transaction amounts within the last 1-hour and 5-mins window, capturing transaction variability. High variability within short periods may indicate unusual spending behavior.
+   - **Tool**: PySpark for efficient distributed feature creation on large datasets.
    - **Script**: `scripts/feature_engineering.py`
 
 ## How to Use
@@ -59,7 +61,7 @@ pip install -r requirements.txt
 2. **Run the Scripts**
    - **Data Loading**: Load data using PySpark by running `load_data.py`.
    - **EDA**: Run `eda.py` to perform exploratory data analysis.
-   - **Feature Engineering**: Execute `feature_engineering.py` to generate additional features.
+   - **Feature Engineering**: Execute `main_pipeline.py` to generate additional features.
 
    Example command:
    ```bash
