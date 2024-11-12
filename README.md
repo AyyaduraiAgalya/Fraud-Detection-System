@@ -85,4 +85,8 @@ pip install -r requirements.txt
 - **Dashboard Visualization**: Develop a Tableau dashboard to visualise fraud detection insights.
 - **A/B Testing**: Incorporate A/B testing frameworks to test model performance in real-world scenarios.
 
+## Dataset Acknowledgment
+This project uses the [Credit Card Fraud Detection dataset](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud), available on Kaggle and provided by the Machine Learning Group at ULB. This dataset is made available under the Database Contents License (DbCL) v1.0, which permits use with attribution.
+To comply with the DbCL license, this project does not redistribute the original data. Instead, interested users can download it directly from [Kaggle](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud).
+
 ---
