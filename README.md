@@ -144,7 +144,7 @@ pip install -r requirements.txt
 - **Python and PySpark**: Working with industry-standard tools for data science in financial fraud detection.
 
 ## Future Enhancements
-- **Threshold Tuning**: Implement threshold optimisation to find the best balance of precision and recall.
+- **Threshold and hyperparameter Tuning**: Implement threshold and hyperparameter optimisation for the Logistic Regression model to find the best balance of precision and recall.
 - **Integration of Distributed Machine Learning**: Extend the project by applying PySpark MLlib for distributed model training.
 - **Dashboard Visualisation**: Develop a Tableau dashboard to visualise fraud detection insights.
 - **A/B Testing**: Incorporate A/B testing frameworks to test model performance in real-world scenarios.
