@@ -1,6 +1,7 @@
 from pyspark.sql import Window, DataFrame
 from pyspark.sql.functions import col, count, avg, stddev
 from data_loading import load_data
+import os
 
 def add_transaction_count_features(df: DataFrame) -> DataFrame:
     """Adds transaction frequency features: count in the last 1 hour and last 5 mins."""
@@ -33,21 +34,31 @@ def add_stddev_amount_feature(df: DataFrame) -> DataFrame:
     df = df.withColumn("Stddev_Amount_Last_5_Mins", stddev("Amount").over(five_mins_window))
     return df
 
-def main_feature_engineering(input_path: str, output_path: str) -> None:
-    """Main function to perform feature engineering on the dataset."""
-    # Loading raw data
-    df = load_data(input_path)
+def main_feature_engineering(input_path: str, output_path: str, use_cache=True) -> None:
+    """
+    Main feature engineering function to load, engineer features, and save output.
+    Skips processing if output already exists.
+    """
+    if use_cache:
+        # Checking if engineered data already exists
+        if os.path.exists(output_path):
+            print("Engineered data already exists. Skipping feature engineering step.")
+            return
+    else:
 
-    # Apply feature engineering functions
-    df = add_transaction_count_features(df)
-    df = add_avg_amount_feature(df)
-    df = add_high_amount_flag(df)
-    df = add_stddev_amount_feature(df)
+        # Loading raw data
+        df = load_data(input_path)
 
-    # Save engineered data for preprocessing
-    df.coalesce(1).write.csv(output_path, header=True, mode="overwrite")
+        # Applying feature engineering functions
+        df = add_transaction_count_features(df)
+        df = add_avg_amount_feature(df)
+        df = add_high_amount_flag(df)
+        df = add_stddev_amount_feature(df)
 
-# Example Usage
+        # Saving engineered data for preprocessing
+        df.coalesce(1).write.csv(output_path, header=True, mode="overwrite")
+
+
 if __name__ == "__main__":
     raw_data_path = "data/raw/creditcard.csv"
     engineered_data_path = "data/engineered"
