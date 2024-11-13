@@ -13,11 +13,11 @@ def main():
 
     # Step 1: Feature Engineering
     print("Applying feature engineering...")
-    main_feature_engineering(raw_data_path, engineered_data_path, use_cache=False)
+    main_feature_engineering(raw_data_path, engineered_data_path, use_cache=True)
 
     # Step 2: Preprocessing
     print("Applying preprocessing...")
-    main_preprocessing(engineered_data_path, preprocessed_data_path, use_cache=False)
+    main_preprocessing(engineered_data_path, preprocessed_data_path, use_cache=True)
 
     # Step 3: Modeling
     print("Training and evaluating model...")
