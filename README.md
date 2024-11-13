@@ -12,8 +12,8 @@ This project uses the **Credit Card Fraud Detection dataset** from Kaggle to bui
 ## Project Structure
 
 - `README.md`: Project documentation.
-- `data/`: Folder containing the original dataset (not included in the GitHub repository; download instructions provided below).
-- `notebooks/`: Jupyter notebooks for initial data exploration and development.
+- `data/`: Folder containing the original dataset (not included in the GitHub repository; download instructions provided below), engineered and preprocessed data
+- `notebooks/`: Jupyter notebooks for initial data exploration and feature engineering.
 - `scripts/`
   - `data_loading.py`: Script for loading raw data into the PySpark environment.
   - `eda.py` : Script for exploratory data analysis
@@ -38,13 +38,10 @@ pip install -r requirements.txt
    - **Tool**: PySpark
    - **Description**: Load the dataset using PySpark DataFrames to enable distributed data processing.
    - **Details**: Reads a CSV file and infers schema automatically for a smooth transition into EDA.
-   - **Script**: `scripts/load_data.py`
+   - **Script**: `scripts/data_loading.py`
 
 2. **Exploratory Data Analysis (EDA)**
-   - **Objective**: Understand the data distribution, check for missing values, and analyze class imbalance.
-   - **Key Steps**:
-     - Generate summary statistics to explore numerical columns.
-     - Calculate and visualize the distribution of fraud (Class column) vs. non-fraud transactions.
+   - **Objective**: Understand the data distribution, check for missing values, and analyse class imbalance.
    - **Outcome**: Insights into the data’s characteristics and imbalance, guiding the model-building stage.
    - **Script**: `scripts/eda.py`
 
@@ -62,7 +59,7 @@ pip install -r requirements.txt
 ## How to Use
 
 ### 1. **Download the Dataset**
-   - Download the **Credit Card Fraud Detection dataset** from Kaggle and save it in the `data/` folder.
+   - Download the **Credit Card Fraud Detection dataset** from Kaggle and save it in the `data/raw` folder.
    - [Link to dataset](https://www.kaggle.com/mlg-ulb/creditcardfraud)
 
 ### 2. **Setup the Environment**
@@ -75,7 +72,7 @@ pip install -r requirements.txt
    python scripts/main.py
    ```
    This command will:
-   - Load the raw data from the `data/` folder.
+   - Load the raw data from the `data/raw` folder.
    - Perform feature engineering using PySpark.
    - Preprocess the engineered data, including scaling and formatting.
    - Save the processed data to the specified output directory.
@@ -93,7 +90,7 @@ pip install -r requirements.txt
      ```bash
      spark-submit scripts/feature_engineering.py
      ```
-   - **Preprocessing**: Apply scaling and transformations to prepare data for modeling:
+   - **Preprocessing**: Apply scaling and transformations to prepare data for modelling:
      ```bash
      spark-submit scripts/preprocessing.py
      ```
@@ -105,7 +102,7 @@ pip install -r requirements.txt
 
 ### Notes
    - **Modularity**: You can run each script independently or use `main.py` for an end-to-end pipeline.
-   - **Data Outputs**: Processed data will be saved in the specified `output/` directory in Parquet format, optimized for further modeling and analysis.
+   - **Data Outputs**: Processed data will be saved in the specified `output/` directory in Parquet format, optimised for further modelling and analysis.
 
 ## Results (to be updated)
 - Summary of model performance metrics (to be added after model training).
@@ -118,7 +115,7 @@ pip install -r requirements.txt
 
 ## Future Enhancements
 - **Integration of Distributed Machine Learning**: Extend the project by applying PySpark MLlib for distributed model training.
-- **Dashboard Visualization**: Develop a Tableau dashboard to visualise fraud detection insights.
+- **Dashboard Visualisation**: Develop a Tableau dashboard to visualise fraud detection insights.
 - **A/B Testing**: Incorporate A/B testing frameworks to test model performance in real-world scenarios.
 
 ## Dataset Acknowledgment
