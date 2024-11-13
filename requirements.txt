@@ -6,3 +6,5 @@ numpy
 notebook
 pyspark
 ipykernel
+scikit-learn
+imblearn

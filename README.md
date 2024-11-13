@@ -14,7 +14,13 @@ This project uses the **Credit Card Fraud Detection dataset** from Kaggle to bui
 - `README.md`: Project documentation.
 - `data/`: Folder containing the original dataset (not included in the GitHub repository; download instructions provided below).
 - `notebooks/`: Jupyter notebooks for initial data exploration and development.
-- `scripts/`: Python scripts for modularised code, including data loading, cleaning, and feature engineering.
+- `scripts/`
+  - `data_loading.py`: Script for loading raw data into the PySpark environment.
+  - `eda.py` : Script for exploratory data analysis
+  - `feature_engineering.py`: Script for engineering time-based and transaction-based features relevant to fraud detection.
+  - `preprocessing.py`: Script to handle data preprocessing, including ensuring numerical data types, scaling features, and splitting data into train/test sets.
+  - `main.py`: The main script orchestrating the entire pipeline from data loading, feature engineering, preprocessing, to data export for modelling.
+
 
 ## Requirements
 - **Python 3.6+**
@@ -52,26 +58,54 @@ pip install -r requirements.txt
    - **Tool**: PySpark for efficient distributed feature creation on large datasets.
    - **Script**: `scripts/feature_engineering.py`
 
+
 ## How to Use
 
-1. **Download the Dataset**
+### 1. **Download the Dataset**
    - Download the **Credit Card Fraud Detection dataset** from Kaggle and save it in the `data/` folder.
    - [Link to dataset](https://www.kaggle.com/mlg-ulb/creditcardfraud)
 
-2. **Run the Scripts**
-   - **Data Loading**: Load data using PySpark by running `load_data.py`.
-   - **EDA**: Run `eda.py` to perform exploratory data analysis.
-   - **Feature Engineering**: Execute `main_pipeline.py` to generate additional features.
+### 2. **Setup the Environment**
+   - Ensure that PySpark is installed and properly configured in your environment.
+   - Optionally, set up a virtual environment for managing dependencies.
 
-   Example command:
+### 3. **Run the Full Pipeline**
+   - The project is designed to run as a full pipeline from data loading through preprocessing. Use `main.py` to execute the entire pipeline:
    ```bash
-   spark-submit scripts/load_data.py
+   python scripts/main.py
    ```
+   This command will:
+   - Load the raw data from the `data/` folder.
+   - Perform feature engineering using PySpark.
+   - Preprocess the engineered data, including scaling and formatting.
+   - Save the processed data to the specified output directory.
 
-3. **Next Steps**
-   - **Model Building**: Build and evaluate a machine learning model to detect fraudulent transactions.
-   - **Advanced Feature Engineering**: Further enhance features to improve model accuracy.
-   - **Evaluation Metrics**: Establish and track metrics like detection rate and alert rate for model performance.
+### 4. **Run Individual Scripts**
+   - **Data Loading**: Load the dataset as a standalone step if needed:
+     ```bash
+     spark-submit scripts/data_loading.py
+     ```
+   - **Exploratory Data Analysis (EDA)**: For initial data insights, run:
+     ```bash
+     spark-submit scripts/eda.py
+     ```
+   - **Feature Engineering**: To add features to the dataset, run:
+     ```bash
+     spark-submit scripts/feature_engineering.py
+     ```
+   - **Preprocessing**: Apply scaling and transformations to prepare data for modeling:
+     ```bash
+     spark-submit scripts/preprocessing.py
+     ```
+
+### 5. **Next Steps**
+   - **Model Building**: Proceed to develop and train machine learning models for fraud detection.
+   - **Advanced Feature Engineering**: Iterate on feature engineering to enhance model performance.
+   - **Evaluation Metrics**: Establish metrics such as detection rate and alert rate to evaluate model effectiveness in identifying fraudulent transactions.
+
+### Notes
+   - **Modularity**: You can run each script independently or use `main.py` for an end-to-end pipeline.
+   - **Data Outputs**: Processed data will be saved in the specified `output/` directory in Parquet format, optimized for further modeling and analysis.
 
 ## Results (to be updated)
 - Summary of model performance metrics (to be added after model training).
