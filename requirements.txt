@@ -8,3 +8,4 @@ pyspark
 ipykernel
 scikit-learn
 imblearn
+matplotlib

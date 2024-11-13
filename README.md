@@ -19,13 +19,14 @@ This project uses the **Credit Card Fraud Detection dataset** from Kaggle to bui
   - `eda.py` : Script for exploratory data analysis.
   - `feature_engineering.py`: Script for engineering time-based and transaction-based features relevant to fraud detection.
   - `preprocessing.py`: Script to handle data preprocessing, including ensuring numerical data types, scaling features, and splitting data into train/test sets.
-  - `modelling.py`: Script to train and evaluate the fraud detection model.
+  - `modelling.py`: Script for model training and evaluation, including logistic regression with advanced evaluation metrics.
   - `main.py`: The main script orchestrating the entire pipeline from data loading, feature engineering, preprocessing, to model training and evaluation.
 
 ## Requirements
 - **Python 3.6+**
 - **PySpark**: Distributed processing for data loading, cleaning, feature engineering, and model training.
 - **Pandas, NumPy**: Core libraries for data manipulation.
+- **Matplotlib**: For plotting Precision-Recall and ROC curves.
 
 To install required packages:
 ```bash
@@ -68,6 +69,18 @@ pip install -r requirements.txt
      - **Model Training**: Train a logistic regression model with PySpark MLlib.
      - **Evaluation Metrics**: Evaluate model performance using AUC (Area Under the Curve) to measure the model’s accuracy in distinguishing fraudulent from non-fraudulent transactions.
    - **Script**: `scripts/modelling.py`
+   
+6. **Advanced Evaluation Metrics**
+   - **Objective**: Assess model performance beyond AUC using additional metrics suited to fraud detection.
+   - **Metrics Included**:
+     - **Precision**: The proportion of correctly identified frauds out of all identified frauds, indicating the accuracy of positive predictions.
+     - **Recall**: The proportion of actual frauds correctly identified by the model, highlighting sensitivity.
+     - **F1 Score**: The harmonic mean of precision and recall, balancing the two metrics for overall effectiveness.
+     - **False Positive Rate**: The proportion of legitimate transactions incorrectly flagged as fraud.
+     - **True Positive Rate**: The model’s ability to correctly identify fraud cases.
+     - **Precision-Recall Curve**: A plot of precision against recall at various thresholds, aiding in understanding trade-offs between precision and recall.
+     - **ROC Curve and AUC**: The Receiver Operating Characteristic curve and Area Under the Curve summarize the model’s ability to distinguish between fraud and non-fraud cases.
+   - **Script**: These metrics are integrated into `scripts/modelling.py`.
 
 ## How to Use
 
@@ -88,7 +101,7 @@ pip install -r requirements.txt
    - Load the raw data from the `data/raw` folder.
    - Perform feature engineering using PySpark.
    - Preprocess the engineered data, including scaling and formatting.
-   - Train and evaluate the logistic regression model.
+   - Train and evaluate the logistic regression model with advanced metrics.
    - Save the model and output relevant performance metrics.
 
 4. **Run Individual Scripts**
@@ -114,7 +127,15 @@ pip install -r requirements.txt
      ```
 
 ## Results
-- **Model Performance**: The logistic regression model achieved an AUC score of 0.9709, indicating strong predictive performance in identifying fraudulent transactions.
+- **Model Performance**: The baseline logistic regression model achieved an **AUC score of 0.9709**, indicating strong predictive performance in distinguishing between fraudulent and legitimate transactions.
+- **Advanced Evaluation Metrics**:
+  - **Precision**: 0.8923 – The model accurately identified frauds out of all instances it flagged as fraudulent.
+  - **Recall**: 0.5918 – The model captured approximately 59.18% of actual fraud cases, highlighting its sensitivity.
+  - **F1 Score**: 0.7117 – A balanced metric combining precision and recall, showing overall effectiveness.
+  - **False Positive Rate**: 0.0001 – The model maintained a very low rate of incorrectly flagging legitimate transactions as fraud.
+  - **Precision-Recall Curve**: Visual analysis indicates a balance between precision and recall, essential for effective fraud detection.
+  - **ROC Curve**: The Receiver Operating Characteristic curve shows a high AUC, further validating the model's ability to distinguish between fraud and non-fraud cases.
+
 
 ## Skills Highlighted
 - **Distributed Processing**: Using PySpark to process and engineer features in a scalable environment.
@@ -123,6 +144,7 @@ pip install -r requirements.txt
 - **Python and PySpark**: Working with industry-standard tools for data science in financial fraud detection.
 
 ## Future Enhancements
+- **Threshold Tuning**: Implement threshold optimisation to find the best balance of precision and recall.
 - **Integration of Distributed Machine Learning**: Extend the project by applying PySpark MLlib for distributed model training.
 - **Dashboard Visualisation**: Develop a Tableau dashboard to visualise fraud detection insights.
 - **A/B Testing**: Incorporate A/B testing frameworks to test model performance in real-world scenarios.
