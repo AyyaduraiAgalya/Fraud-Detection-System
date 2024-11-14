@@ -145,6 +145,7 @@ pip install -r requirements.txt
 
 ## Future Enhancements
 - **Threshold and hyperparameter Tuning**: Implement threshold and hyperparameter optimisation for the Logistic Regression model to find the best balance of precision and recall.
+- **Tree-Based Model Development**: Explore tree-based models (e.g., Decision Trees, Random Forests) to assess if they yield better recall rates, as tree-based algorithms often capture complex patterns and interactions that may improve fraud detection sensitivity.
 - **Integration of Distributed Machine Learning**: Extend the project by applying PySpark MLlib for distributed model training.
 - **Dashboard Visualisation**: Develop a Tableau dashboard to visualise fraud detection insights.
 - **A/B Testing**: Incorporate A/B testing frameworks to test model performance in real-world scenarios.
